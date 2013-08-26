@@ -57,11 +57,6 @@ __(Note: all of the following commands should be run on your host machine, not i
    host machine and issuing libvirt/virsh commands. The user these instructions
    use is your own, but you can also setup a dedicated user if you choose.
 
-1. Make sure you have following patches applied:
-   * baremetal flavor fix (workaround is in description): https://bugs.launchpad.net/tripleo/+bug/1213967
-   * network IP fix: https://review.openstack.org/#/c/42585/
-   * create 64bit nodes: https://github.com/jprovaznik/tripleo-incubator/commit/44d9eeaad971f423c6c46227e9933f713e980eba
-
 1. Check that the default libvirt connection for your user is qemu:///system.
    If it is not, set an environment variable to configure the connection.
    This configuration is necessary for consistency, as later steps assume
@@ -97,6 +92,10 @@ __(Note: all of the following commands should be run on your host machine, not i
 1. Clone/update the other needed tools which are not available as packages.
 
         pull-tools
+
+1. Make sure you have following patches applied:
+   * baremetal flavor fix (workaround is in description): https://bugs.launchpad.net/tripleo/+bug/1213967
+   * create 64bit nodes: https://github.com/jprovaznik/tripleo-incubator/commit/44d9eeaad971f423c6c46227e9933f713e980eba
 
 1. You need to make the tripleo image elements accessible to diskimage-builder:
 
@@ -213,7 +212,7 @@ __(Note: all of the following commands should be run on your host machine, not i
 
         # Delete the rule that prevent the Fedora bootstrap vm from forwarding
         # packets.
-        root@$SEED_IP iptables -D FORWARD -j REJECT --reject-with icmp-host-prohibited 
+        ssh root@$SEED_IP iptables -D FORWARD -j REJECT --reject-with icmp-host-prohibited 
 
         SERVICE_TOKEN=unset setup-endpoints $UNDERCLOUD_IP
         user-config
