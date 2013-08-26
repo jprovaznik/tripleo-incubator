@@ -5,8 +5,8 @@ BASE=$(dirname $0)/../
 CPU=$1
 MEM=$2
 DISK=$3
-NODES=$4
-arch=i386
+ARCH=$4
+NODES=$5
 
 # Perhaps make this always recreate the nodes for repeatability?
 $BASE/scripts/register-nodes $CPU $MEM $DISK $NODES
@@ -28,6 +28,6 @@ nova flavor-delete m1.xlarge || true
 
 nova flavor-delete baremetal || true
 nova flavor-create baremetal auto $2 $3 $1
-nova flavor-key baremetal set "cpu_arch"="$arch" \
+nova flavor-key baremetal set "cpu_arch"="$ARCH" \
     "baremetal:deploy_kernel_id"="$deploy_kernel_id" \
     "baremetal:deploy_ramdisk_id"="$deploy_ramdisk_id"

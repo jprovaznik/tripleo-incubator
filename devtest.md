@@ -158,12 +158,12 @@ __(Note: all of the following commands should be run on your host machine, not i
 
         export MACS=`$TRIPLEO_ROOT/bm_poseur/bm_poseur get-macs`
 
-1. Perform setup of your seed cloud. The 1 1024 10 is CPU count, memory in MB,
-   disk in GB for your test nodes.
+1. Perform setup of your seed cloud. The 1 1024 10 i386 is CPU count, memory in MB,
+   disk in GB, architecture (i386, amd64) for your test nodes.
 
         SERVICE_TOKEN=unset setup-endpoints 192.0.2.1
         user-config
-        setup-baremetal 1 1024 10 seed
+        setup-baremetal 1 1024 10 i386 seed
         setup-neutron 192.0.2.2 192.0.2.3 192.0.2.0/24 192.0.2.1 ctlplane
 
 1. Allow the VirtualPowerManager to ssh into your host machine to power on vms:
@@ -204,11 +204,11 @@ __(Note: all of the following commands should be run on your host machine, not i
         export no_proxy=$no_proxy,$UNDERCLOUD_IP
 
 1. Perform setup of your undercloud. The 1 1024 10 is CPU count, memory in MB, disk
-   in GB for your test nodes.
+   in GB, architecture (i386, amd64) for your test nodes.
 
         SERVICE_TOKEN=unset setup-endpoints $UNDERCLOUD_IP
         user-config
-        setup-baremetal 1 1024 10 undercloud
+        setup-baremetal 1 1024 10 i386 undercloud
         setup-neutron 192.0.2.5 192.0.2.24 192.0.2.0/24 $UNDERCLOUD_IP ctlplane
 
 1. Allow the VirtualPowerManager to ssh into your host machine to power on vms:
