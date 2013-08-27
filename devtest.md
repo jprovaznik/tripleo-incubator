@@ -206,6 +206,9 @@ __(Note: all of the following commands should be run on your host machine, not i
 1. Perform setup of your undercloud. The 1 1024 10 is CPU count, memory in MB, disk
    in GB, architecture (i386, amd64) for your test nodes.
 
+        # FIXME: Delete the rule that prevent the Fedora bootstrap vm from forwarding packets.
+        ssh root@$SEED_IP iptables -D FORWARD -j REJECT --reject-with icmp-host-prohibited 
+
         SERVICE_TOKEN=unset setup-endpoints $UNDERCLOUD_IP
         user-config
         setup-baremetal 1 1536 15 i386 undercloud
