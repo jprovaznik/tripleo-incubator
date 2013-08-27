@@ -28,6 +28,11 @@ nova flavor-delete m1.xlarge || true
 
 nova flavor-delete baremetal || true
 nova flavor-create baremetal auto $2 $3 $1
-nova flavor-key baremetal set "cpu_arch"="$ARCH" \
+# FIXME: for amd64, if cpu_arch is set for flavor, nova
+# doesn't find suitable baremetal node (even if amd64 arch
+# is set in heat template). Related to:
+# https://bugs.launchpad.net/tripleo/+bug/1213967
+#nova flavor-key baremetal set "cpu_arch"="$ARCH" \
+nova flavor-key baremetal set \
     "baremetal:deploy_kernel_id"="$deploy_kernel_id" \
     "baremetal:deploy_ramdisk_id"="$deploy_ramdisk_id"
